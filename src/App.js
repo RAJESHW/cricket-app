@@ -51,7 +51,8 @@ class App extends Component {
        const { match } = this.state
        const singleMatchData = match.map((item, index) => {
           return (  <div key={item.id}>
-               <span>{item.de}</span>
+               <div>{item.de}</div>
+               <div>{item.si}</div>
              </div>
            )
        })
