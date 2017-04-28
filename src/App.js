@@ -10,7 +10,7 @@ class App extends Component {
       super(props)
       this.state = {
         matches: [],
-        match: {}
+        match: []
       }
     }
     componentDidMount() {
@@ -26,17 +26,39 @@ class App extends Component {
         console.log(err)
       })
     }
+
+    _handleClick(id, e){
+      fetch('https://cricscore-api.appspot.com/csa?id=' + id)
+      .then(res => res.json())
+      .then((json) => {
+        console.log(json)
+        this.setState({
+          match: json
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
     render() {
-      const { matches } = this.state
+
+      const { matches, match } = this.state
+      console.log(match)
       const data = matches.map((item, index) => {
         return (
           <tr key={item.id}>
             <td>{item.t1}</td>
             <td>{item.t2}</td>
-            <td>{item.id}</td>
+            <td><a onClick={this._handleClick.bind(this, item.id)}>{item.id}</a></td>
           </tr>
         )
       })
+
+      const foo = match.map((item, index) => {
+        return <div key={index}>{item.de}</div>
+      })
+
+
       return (
         <div className="App">
           <table>
@@ -45,11 +67,7 @@ class App extends Component {
             </tbody>
           </table>
 
-          {
-            Object.keys(match).length !== 0 && match.constructor !== Object ?
-            <div>Render your match data here</div> :
-            null
-          }
+          {foo}
 
         </div>
       )
