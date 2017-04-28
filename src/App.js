@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './App.css'
-
 /*
   1. Grab the data and set the state first
 */
@@ -10,16 +9,28 @@ class App extends Component {
       super(props)
       this.state = {
         matches: [],
-        match: {}
+        match: []
       }
+      this.individualData = this.individualData.bind(this)
     }
     componentDidMount() {
       fetch('https://cricscore-api.appspot.com/csa')
       .then(res => res.json())
       .then((json) => {
-        console.log(json)
         this.setState({
           matches: json
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
+    individualData(e, id) {
+      fetch('https://cricscore-api.appspot.com/csa?id='+id)
+      .then(res => res.json())
+      .then((json) => {
+        this.setState({
+          match: json
         })
       })
       .catch((err) => {
@@ -33,26 +44,33 @@ class App extends Component {
           <tr key={item.id}>
             <td>{item.t1}</td>
             <td>{item.t2}</td>
-            <td>{item.id}</td>
+            <td><a href="#" onClick={() => this.individualData(this, item.id)}>Show Result</a></td>
           </tr>
         )
       })
+       const { match } = this.state
+       const singleMatchData = match.map((item, index) => {
+          return (  <div key={item.id}>
+               <span>{item.de}</span>
+             </div>
+           )
+       })
       return (
-        <div className="App">
-          <table>
-            <tbody>
-              {data}
-            </tbody>
-          </table>
-
-          {
-            Object.keys(match).length !== 0 && match.constructor !== Object ?
-            <div>Render your match data here</div> :
-            null
-          }
-
+        <div className="App container">
+         <h1>Cricket Scores</h1>
+         <div className="row">
+           <div className="col-lg-6">
+              <table className="table table-striped">
+                <tbody>
+                  {data}
+                </tbody>
+              </table>
+            </div>
+            <div className="col-lg-6">{singleMatchData}</div>
+         </div>
         </div>
       )
+
     }
 }
 
