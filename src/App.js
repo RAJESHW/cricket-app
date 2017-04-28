@@ -25,6 +25,7 @@ class App extends Component {
         console.log(err)
       })
     }
+
     individualData(e, id) {
       fetch('https://cricscore-api.appspot.com/csa?id='+id)
       .then(res => res.json())
@@ -38,7 +39,9 @@ class App extends Component {
       })
     }
     render() {
-      const { matches } = this.state
+
+      const { matches, match } = this.state
+      console.log(match)
       const data = matches.map((item, index) => {
         return (
           <tr key={item.id}>
