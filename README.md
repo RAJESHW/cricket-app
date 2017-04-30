@@ -2,7 +2,7 @@
 
 - Install [Node](https://nodejs.org/en/)
 - Install Access-Control-Allow-Origin extension only Chrome [Click to Install](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en) and start app
-- Open Git Bash in the folder and run ### `npm start` BOOM App Startzz in your default browser hoping it should be Chrome
+- Open Git Bash in the folder and run `npm i` and `npm start` BOOM App Startzz in your default browser hoping it should be Chrome
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
