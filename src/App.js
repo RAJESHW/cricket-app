@@ -41,7 +41,6 @@ class App extends Component {
     render() {
 
       const { matches, match } = this.state
-      console.log(match)
       const data = matches.map((item, index) => {
         return (
           <tr key={item.id}>
@@ -51,7 +50,6 @@ class App extends Component {
           </tr>
         )
       })
-       const { match } = this.state
        const singleMatchData = match.map((item, index) => {
           return (  <div key={item.id}>
                <div>{item.de}</div>
